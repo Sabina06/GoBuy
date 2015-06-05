@@ -1,0 +1,38 @@
+﻿@model GoBuy.Models.Category
+@{
+    Layout = "~/Views/_Shared/_LayoutPage1.cshtml";
+}
+
+           
+<h2>
+    分類: @Model.CategoryName
+</h2>
+<table>
+    <thead>
+        <tr>
+            <th>商品編號</th>
+            <th>商品名稱</th>
+            <th>定價</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Product)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Category.CategoryName</td>
+                <td>
+                    <img src="~/@Url.Content(product.ProductUrl == null ?"Content/Images/product_s.jpg" :product.ProductUrl)"
+                         alt="Image" class="product_img_s" />
+                </td>
+                <td>
+                    <a href=@Url.Action("Details/" +
+product.ProductId, "Mart")>檢視</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

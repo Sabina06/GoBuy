@@ -1,0 +1,46 @@
+﻿@model GoBuy.ViewModel.RegisterViewModel
+@{
+    Layout = null;
+}
+<div>
+<div id="form_title_label"><label><b>建立新帳戶</b></label></div>
+@using (Html.BeginForm("Register", "Register", FormMethod.Post, new { id = "form-register" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.LabelFor(x => x.EName, new { @class = "form_label" })
+        <div>
+            @Html.TextBoxFor(x => x.EName, new { @class = "form_control" })
+        </div>
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Account, new { @class = "form_label" })
+        <div>
+            @Html.TextBoxFor(x => x.Account, new { @class = "form_control" })
+        </div>
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Email, new { @class = "form_label" })
+        <div>
+            @Html.TextBoxFor(x => x.Email, new { @class = "form_control" })
+        </div>
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Password, new { @class = "form_label" })
+        <div>
+            @Html.PasswordFor(x => x.Password, new { @class = "form_control" })
+        </div>
+    </div>
+    <div>
+        @Html.LabelFor(x => x.ConfirmPassword, new { @class = "form_label" })
+        <div>
+            @Html.PasswordFor(x => x.ConfirmPassword,
+new { @class = "form_control" })
+        </div>
+    </div>
+    <input type="submit" value="註冊" id="register-button" />
+}
+<div class="form_error_message">
+    @Html.ValidationSummary()
+</div>
+</div>

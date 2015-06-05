@@ -1,0 +1,29 @@
+﻿@model GoBuy.ViewModel.RegisterViewModel
+@{
+    Layout = null;
+}
+<div>
+    <div id="form_title_label"><label><b>Index</b></label></div>
+   
+        @Html.AntiForgeryToken()
+       
+        <div>
+            @Html.LabelFor(x => x.Account, new { @class = "form_label" })
+            <div>
+                @Html.TextBoxFor(x => x.Account, new { @class = "form_control" })
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(x => x.Password, new { @class = "form_label" })
+            <div>
+                @Html.PasswordFor(x => x.Password, new { @class = "form_control" })
+            </div>
+        </div>
+    @Html.ActionLink("Login", "Login", "Register", new { area = "" }, new { @class = "navbar-brand" })
+    @Html.ActionLink("Sing Up", "Register", "Register", new { area = "" }, new { @class = "navbar-brand" })
+     
+    
+    <div class="form_error_message">
+        @Html.ValidationSummary()
+    </div>
+</div>

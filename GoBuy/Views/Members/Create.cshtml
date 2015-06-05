@@ -1,0 +1,83 @@
+﻿@model GoBuy.Models.Member
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Member</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.EnName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EnName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EnName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+        <dt><label for="">客戶編號</label> :</dt>
+        <dd>
+            <input class="text-box single-line" data-val="true" data-val-number="欄位 客戶編號 必須是數字。"
+                   data-val-range="範圍值為1~99999" data-val-range-max="10000" data-val-range-min="1" data-val-required="請輸入客戶編號"
+                   id="Sn" name="Sn" type="text" />
+        </dd>
+        <dd><span class="field-validation-valid" data-valmsg-for="Sn" data-valmsg-replace="true"></span></dd>
+
+        <dt><label for="CName">中文姓名</label>：</dt>
+        <dd>
+            <input class="text-box text-box" data-vall="true" data-val-length="請勿輸入超過32個字"
+                   data-val-length-max="32" data-val-required="請輸入中文名稱" id="CName" name="CName" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="CName" data-valmsg-replace="true"></span>
+        </dd>
+    <input type="text" id="tDigit" name="tDigit" value="-1234"
+           data-val="true" data-val-digits="只接受數字字元" />
+    <span data-valmsg-for="tDigit"></span>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+
+
+</html>
