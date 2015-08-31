@@ -7,7 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GoBuy.Models;
-
+using GoBuy.ViewModel;
+using System.Text;
+using System.Collections;
 namespace GoBuy.Controllers
 {
     public class ProductsController : Controller
@@ -38,7 +40,21 @@ namespace GoBuy.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
+            var categories = db.Category;
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (var category in categories)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Text = category.CategoryName,
+                    Value = category.CategoryId.ToString()
+
+                });
+            }
+            ViewBag.CategoryItems = items;
+
             return View();
+            
         }
 
         // POST: Products/Create
@@ -52,26 +68,52 @@ namespace GoBuy.Controllers
             {
                 db.Product.Add(product);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
             return View(product);
         }
 
+
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
+            var categories = db.Category;
+
+            //Dictionary<string, string> dict = new Dictionary<string, string>();
+            //foreach (var category in categories)
+            //{
+            //    dict.Add(category.CategoryName, category.CategoryName);
+            //}
+            //ViewData["CategoryDDL"] = DropDownListHelper.GetDropdownList(
+            //    "CategoryDDL", dict, new { id = "CategoryDDL" }, collection["CotegiryDDL"] ?? null,
+            //    true, "請選擇分類"
+            //    );
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Product.Find(id);
+
             if (product == null)
             {
+
                 return HttpNotFound();
             }
+
+
+            SelectList selectList = new SelectList(categories, "CategoryId", "CategoryName", product.CategoryId);
+            ProductEditViewModel viewmodel = new ProductEditViewModel()
+            {
+                Product = product,
+                CategoryList = selectList
+            };
+            ViewBag.CategorySelectList = selectList;
+            
+            return View("Edit2", viewmodel);
+            //    return View("Edit", product);
            
-            return View(product);
         }
 
         // POST: Products/Edit/5
@@ -84,13 +126,27 @@ namespace GoBuy.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
-               
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+
+            }
+            return View(product);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit2([Bind(Include = "ProductId,Name,Price,CategoryId")] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(product).State = EntityState.Modified;
+                db.Product.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(product);
         }
-
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -116,7 +172,14 @@ namespace GoBuy.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [ChildActionOnly]
 
+        public ActionResult CategoryMenu()
+        {
+            GoBuyEntities db = new GoBuyEntities();
+            var categories = db.Category.ToList();
+            return PartialView(categories);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -125,5 +188,15 @@ namespace GoBuy.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Browse(int categoryId)
+        {
+            GoBuyEntities db = new GoBuyEntities();
+            var categroy = db.Category.Include("Product").
+            Single(x => x.CategoryId == categoryId);
+            return View(categroy);
+
+
+        }
+
     }
 }

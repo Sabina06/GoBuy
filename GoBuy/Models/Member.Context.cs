@@ -29,5 +29,7 @@ namespace GoBuy.Models
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<SystemRoles> SystemRoles { get; set; }
+        public virtual DbSet<City> City { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
     }
 }

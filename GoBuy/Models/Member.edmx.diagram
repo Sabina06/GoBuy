@@ -11,6 +11,9 @@
         <AssociationConnector Association="GoBuyModel.FK__Product__Categor__34C8D9D1" />
         <EntityTypeShape EntityType="GoBuyModel.SystemRoles" Width="1.5" PointX="0.875" PointY="3.875" />
         <AssociationConnector Association="GoBuyModel.FK__Member__roleID__49C3F6B7" />
+        <EntityTypeShape EntityType="GoBuyModel.City" Width="1.5" PointX="7.625" PointY="0.875" />
+        <EntityTypeShape EntityType="GoBuyModel.Country" Width="1.5" PointX="5.375" PointY="1" />
+        <AssociationConnector Association="GoBuyModel.FK__City__CountryID__5EBF139D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

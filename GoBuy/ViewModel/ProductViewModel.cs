@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using GoBuy.Models;
+using System.Web.Mvc;
 namespace GoBuy.ViewModel
 {
     public class ProductViewModel
@@ -14,5 +15,6 @@ namespace GoBuy.ViewModel
         public string ProductUrl { get; set; }
         
         public virtual Category Category { get; set; }
+        public IEnumerable<SelectListItem> CategoryList { get; set; }
     }
 }

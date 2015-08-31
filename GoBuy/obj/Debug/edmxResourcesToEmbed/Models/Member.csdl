@@ -10,7 +10,7 @@
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="roleID" Type="Int32" />
-    <Property Name="Enable" Type="String" />
+    <Property Name="Enable" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="SystemRoles" Relationship="GoBuyModel.FK__Member__roleID__49C3F6B7" FromRole="Member" ToRole="SystemRoles" />
     <Property Name="RegDate" Type="DateTime" Precision="3" />
   </EntityType>
@@ -26,6 +26,12 @@
     <AssociationSet Name="FK__Member__roleID__49C3F6B7" Association="GoBuyModel.FK__Member__roleID__49C3F6B7">
       <End Role="SystemRoles" EntitySet="SystemRoles" />
       <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <EntitySet Name="City" EntityType="GoBuyModel.City" />
+    <EntitySet Name="Country" EntityType="GoBuyModel.Country" />
+    <AssociationSet Name="FK__City__CountryID__5EBF139D" Association="GoBuyModel.FK__City__CountryID__5EBF139D">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="City" EntitySet="City" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Category">
@@ -78,6 +84,35 @@
       </Principal>
       <Dependent Role="Member">
         <PropertyRef Name="roleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CountryID" Type="Int32" />
+    <NavigationProperty Name="Country" Relationship="GoBuyModel.FK__City__CountryID__5EBF139D" FromRole="City" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="City" Relationship="GoBuyModel.FK__City__CountryID__5EBF139D" FromRole="Country" ToRole="City" />
+  </EntityType>
+  <Association Name="FK__City__CountryID__5EBF139D">
+    <End Type="GoBuyModel.Country" Role="Country" Multiplicity="0..1" />
+    <End Type="GoBuyModel.City" Role="City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

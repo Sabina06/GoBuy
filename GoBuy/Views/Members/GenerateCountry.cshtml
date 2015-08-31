@@ -1,0 +1,55 @@
+﻿@model GoBuy.ViewModel.AddressViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GenerateCountry</title>
+    <script type="text/javascript">
+    $(document).ready(init);
+    function init() {
+        //當網頁上的DOM都載入時，第一層下拉選單也呈現出來了
+        //↓顯示第二層下拉選單，沒加這兩段↓的話，第一次網頁載入時第二層下拉選單不會出現
+        var FirstLevel = $("select[name='CountryID']").val();//第一層選擇的值
+        ShowSecondDropDownList(FirstLevel);
+
+        //為第一層下拉選單註冊onchange事件
+        $("select[name='CountryID']").change(function () {
+            var FirstLevel = $(this).val();//選擇的值
+            ShowSecondDropDownList(FirstLevel);
+        });
+    }
+    function ShowSecondDropDownList(FirstLevel) {
+        $.ajax({
+            url: "@Url.Action("ShowSecondDropDownList","Home")",
+            type: "get",
+            data: { FirstLevel: FirstLevel },
+            async: false,
+            success: function (data) {
+                $("span").empty().html(data);
+            }
+        });
+    }
+    </script>
+</head>
+<body>
+    <div>
+        @*@Html.DropDownListFor(model => model.Country.CountryID, (IEnumerable<SelectListItem>)ViewBag.CountryItems)*@
+        @Html.DropDownListFor(model => model.Country.CountryID)
+        @*<ul>
+
+                @foreach (var country in Model)
+                {
+                    <li>
+                        @Html.ActionLink(country.CountryName, "Create", "Members")
+                    </li>
+                }
+            </ul>*@
+    </div>
+</body>
+
+</html>

@@ -15,7 +15,7 @@ namespace GoBuy.Controllers
             return View();
         }
         [ChildActionOnly]
-  
+  //no
         public ActionResult CategoryMenu()
         {
             GoBuyEntities db = new GoBuyEntities();

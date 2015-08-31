@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GoBuy.Models;
 using GoBuy.ViewModel;
+using System.Text;
 namespace GoBuy.Controllers
 {
     public class MembersController : Controller
@@ -20,6 +21,8 @@ namespace GoBuy.Controllers
             IndexViewModel index = new IndexViewModel();
             index.member = db.Member.ToList();
             return View(index);
+            //return RedirectToAction("MemberList");
+
         }
 
         // GET: Members/Details/5
@@ -126,6 +129,68 @@ namespace GoBuy.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult generateStateList(int CountryID)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var cc = from sss in db.City
+                     where sss.CountryID == CountryID
+                     select sss;
+
+            foreach (var item in cc)
+            {
+                sb.Append("<option value='" + item.CityID + "'>" + item.CityName + "</option>");
+            }
+
+
+            return Content(sb.ToString(), "text/html");
+        }
+       
+        [ChildActionOnly]
+        public ActionResult GenerateCountry()
+        {
+            var countries = db.Country;
+            //country
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (var country in countries)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Text = country.CountryName,
+                    Value = country.CountryID.ToString()
+
+                });
+            }
+            ViewBag.CountryItems = items;
+            //city
+            var cities = db.City;
+            List<SelectListItem> items2 = new List<SelectListItem>();
+            foreach (var city in cities)
+            {
+                items2.Add(new SelectListItem()
+                {
+                    Text = city.CityName,
+                    Value = city.CityID.ToString()
+
+                });
+            }
+            ViewBag.CityItems = items2;
+
+
+            return PartialView();
+        }
+        public ActionResult ShowSecondDropDownList()
+        {
+            ////使用Linq撈出第二層的資料
+            //var items = (from s in secondLevelItems
+            //             where s.FirstLevel == FirstLevel
+            //             select new SelectListItem { Text = s.SecondLevel, Value = s.SecondLevel }).ToList();
+            ////加入「請選擇」
+            //items.Insert(0, new SelectListItem() { Text = "請選擇", Value = "-1" });
+            //ViewData["SecondLevelItems"] = items;
+            return View();
+        
         }
     }
 }

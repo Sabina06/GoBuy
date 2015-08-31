@@ -8,6 +8,21 @@
     <Property Name="CategoryName" Type="varchar" MaxLength="50" />
     <Property Name="Description" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="varchar" MaxLength="50" />
+    <Property Name="CountryID" Type="int" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" Nullable="false" />
+    <Property Name="CountryName" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Member">
     <Key>
       <PropertyRef Name="Memno" />
@@ -39,6 +54,18 @@
     <Property Name="role" Type="varchar" MaxLength="50" />
     <Property Name="description" Type="varchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK__City__CountryID__5EBF139D">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Member__roleID__49C3F6B7">
     <End Role="SystemRoles" Type="Self.SystemRoles" Multiplicity="0..1" />
     <End Role="Member" Type="Self.Member" Multiplicity="*" />
@@ -63,32 +90,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Product__Categor__4AB81AF0">
-    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="CategoryId" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="CategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="GoBuyModelStoreContainer">
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SystemRoles" EntityType="Self.SystemRoles" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__City__CountryID__5EBF139D" Association="Self.FK__City__CountryID__5EBF139D">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
     <AssociationSet Name="FK__Member__roleID__49C3F6B7" Association="Self.FK__Member__roleID__49C3F6B7">
       <End Role="SystemRoles" EntitySet="SystemRoles" />
       <End Role="Member" EntitySet="Member" />
     </AssociationSet>
     <AssociationSet Name="FK__Product__Categor__34C8D9D1" Association="Self.FK__Product__Categor__34C8D9D1">
-      <End Role="Category" EntitySet="Category" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Product__Categor__4AB81AF0" Association="Self.FK__Product__Categor__4AB81AF0">
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>

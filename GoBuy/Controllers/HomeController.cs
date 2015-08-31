@@ -16,7 +16,7 @@ namespace GoBuy.Controllers
             var categories = db.Category.ToList();
             return View(categories);
         }
-         
+         //no
         public ActionResult Browse(int categoryId)
         {
             GoBuyEntities db = new GoBuyEntities();

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<GoBuy.Models.Category>
+
+<ul>
+    @foreach (var category in Model)
+    {
+        <li>
+            @Html.ActionLink(category.CategoryName, "Browse", "Products", new { categoryId=  category.CategoryId},null)
+        </li>
+    }
+</ul>
+
+

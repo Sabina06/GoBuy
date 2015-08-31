@@ -4,13 +4,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/_Shared/_LayoutPage1.cshtml";
 }
+
 @using (Html.BeginForm())
 {
-<h2>Index</h2>
-
-<p>
-
-</p>
+    <h2>Product</h2>
+    Html.RenderAction("CategoryMenu", "Products");
 <table class="table">
     <tr>
         <th>

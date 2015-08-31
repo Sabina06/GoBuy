@@ -1,7 +1,5 @@
 ﻿ @model GoBuy.ViewModel.IndexViewModel
-
-             
-
+  
  @{
      Layout = "~/Views/_Shared/_LayoutPage1.cshtml";
  }
@@ -29,7 +27,7 @@
                      <p>
                         <label>@m.Memno .</label>
                         <span>
-                            <a href="Details?categoryId=@m.Memno">@m.EnName</a>
+                            <a href="Members/Details?id=@m.Memno">@m.EnName</a>
                         </span>
                     </p>
                 }
@@ -37,4 +35,6 @@
 
 
     </body>
+
+
 </html>
