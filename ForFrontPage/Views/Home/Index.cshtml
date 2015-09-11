@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/vue.js"></script>
+@*<span v-class="
+  red    : hasError,
+  bold   : isImportant,
+  hidden : isHidden">ddddddddddddd</span>
+
+<div v-text="message">msee</div>
+<input type="checkbox" v-model="checked">
+{{checked ? "yes" : "no"}}*@
+
+@*<div id="app">
+    <range value="{{@value}}"></range>
+    actual: {{value}}
+    <hr>
+    <button disabled="{{value === 100}}" v-on="click:value+=10">+10</button>
+    <button disabled="{{value === 0}}" v-on="click:value-=10">-10</button>*@
+<div id="demo">
+    <p>{{message|reverse|uppercase}}</p>
+        <input v-model="message">
+        <button v-disable="disabled">{{disable?'Disabled':'Submit'}}</button>
+
+    <div id="demo">
+        <h1>{{n}}</h1>
+        <button v-on="click: onClick">click me</button>
+
+        <ul>
+            <li v-repeat="todos | orderBy 'title'   ">
+                {{$index}}: {{title}},{{content}},{{$value}}
+               :{{count | pluralize 'st' 'nd' 'rd' 'th'}}
+                {{count | pluralize 'item'}}
+            </li>
+        </ul>
+      {{fullName}}
+    </div>
+    @*<form id="demo">
+        <!-- 普通文字输入 -->
+        <p><input type="text" v-model="msg"> {{msg}}</p>
+        <!-- 多选按钮 -->
+        <p><input type="checkbox" v-model="checked"> {{checked ? "yes" : "no"}}</p>
+        <!-- 单选按钮 -->
+        <p>
+            <input type="radio" name="picked" value="11" v-model="picked">one
+            <input type="radio" name="picked" value="22" v-model="picked">two
+            {{picked.$data}}
+        </p>
+        <!-- 单选下拉 -->
+        <p>
+            <select v-model="selectedx">
+                <option>one</option>
+                <option>two</option>
+                <option>three</option>
+            </select>
+            {{selectedx}}
+        </p>
+        <!-- 多选下拉 -->
+        <p>
+            <select v-model="multiSelect" multiple>
+                <option>one</option>
+                <option>two</option>
+                <option>three</option>
+            </select>
+        </p>
+    </form>*@
+</div>
+<script>
+    var todos = [
+      { title: 'javascript',content:'001',count:1 },
+      { title: 'Vuejs', content: '002',count:2 }
+    ]
+    var user = {
+        firstname: 'John',
+        lastname: 'Doe'
+    }
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            n:1,
+            todos: todos,
+            msg: 'h1',
+            checked: true,
+            picked: 'one',
+            selectedx: 'two',
+            mutiselect: ['one', 'three'],
+            user:$.post('')
+        },
+        methods: {
+            onClick: function (e) {
+                this.n++
+               
+                
+            }
+        },
+        computed: {
+            fullName: function () {
+
+                return user.firstname+' '+user.lastname
+            }
+        },
+        status: function () {
+            return this.validated
+                ? this.okMsg
+                : this.errMsg
+        }
+    })
+    todos.push({ title: 'learn',content:'003',count:3 })
+   // var target= todos[1]
+    //  todos.$remove(target)
+   
+</script>

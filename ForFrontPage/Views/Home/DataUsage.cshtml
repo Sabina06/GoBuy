@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "DataUsage";
+}
+
+<h2>DataUsage</h2>
+@Scripts.Render("~/bundles/jquery")
+<script>
+    var mproduct = null;
+    this._context.ContextOptions.LazyLoadingEnabled = false;
+    $.getJSON("/Home/getProduct",null)
+        .done(function (data) {
+           
+            console.log("data: " + data);
+            mproduct = data;
+            //for (var i = 0; i < data.length; i++) {
+            //    $("#stateList").append("<li>" + data[i].Title + " " + data[i].Genre + " " + data[i].Year + "</li>")
+            //}
+            $.each(data, function (index, optionData) {
+               
+                $("#stateList").append("<li>" + optionData.EnName + " " + optionData.EnName + " " + optionData.EnName + "</li>")
+            })
+        })
+        .fail(function(jqxhr,textStatus,error){ console.log("fail"+error);});
+    
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            n: mproduct
+        },
+        methods: {
+            onClick: function (e) {
+                // e是原生的DOM事件对象
+                // this 指向该ViewModel实例
+                this.n++;
+            }
+        }
+    });
+
+</script>
+<div id="stateList"></div>
+<table>
+    <tr v-repeat="n">
+       
+    </tr>
+</table>

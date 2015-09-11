@@ -175,21 +175,43 @@ namespace GoBuy.Controllers
 
                 });
             }
-            ViewBag.CityItems = items2;
+            ViewBag.CityItems =  items2;
 
 
             return PartialView();
         }
-        public ActionResult ShowSecondDropDownList()
-        {
-            ////使用Linq撈出第二層的資料
-            //var items = (from s in secondLevelItems
-            //             where s.FirstLevel == FirstLevel
-            //             select new SelectListItem { Text = s.SecondLevel, Value = s.SecondLevel }).ToList();
-            ////加入「請選擇」
-            //items.Insert(0, new SelectListItem() { Text = "請選擇", Value = "-1" });
-            //ViewData["SecondLevelItems"] = items;
-            return View();
+
+      [HttpGet]
+        public ActionResult ShowSecondDropDownList(string FirstLevel)
+        {        
+            
+            //------------
+            //city
+            //List<SelectListItem> items2 = new List<SelectListItem>();
+            //var cities = db.City;
+            //foreach (var city in cities.)
+            //{
+            //    items2.Add(new SelectListItem()
+            //    {
+            //        Text = city.CityName,
+            //        Value = city.CityID.ToString()
+
+            //    });
+            //}
+            //var items2 = (from c in db.City
+            //             where c.CountryID.ToString() == FirstLevel
+            //             select new SelectListItem { Text = c.CityName, Value = c.CityID.ToString() }).ToList();
+
+            //ViewBag.CityItems = items2;
+            //return PartialView("GenerateCountry");
+          //------------
+          StringBuilder sb = new StringBuilder();
+          var items2 = from c in db.City where c.CountryID.ToString() ==FirstLevel select c;
+          foreach (var cities in items2)
+          {
+              sb.AppendFormat("<option value='{0}'>{1}</option>",cities.CityID,cities.CityName);   
+          }
+          return Content(sb.ToString(),"text/html");
         
         }
     }

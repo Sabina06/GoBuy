@@ -9,47 +9,56 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>GenerateCountry</title>
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script type="text/javascript">
-    $(document).ready(init);
-    function init() {
-        //當網頁上的DOM都載入時，第一層下拉選單也呈現出來了
-        //↓顯示第二層下拉選單，沒加這兩段↓的話，第一次網頁載入時第二層下拉選單不會出現
-        var FirstLevel = $("select[name='CountryID']").val();//第一層選擇的值
-        ShowSecondDropDownList(FirstLevel);
-
-        //為第一層下拉選單註冊onchange事件
-        $("select[name='CountryID']").change(function () {
-            var FirstLevel = $(this).val();//選擇的值
+        $(document).ready(init);
+        function init() {
+            //當網頁上的DOM都載入時，第一層下拉選單也呈現出來了
+            //↓顯示第二層下拉選單，沒加這兩段↓的話，第一次網頁載入時第二層下拉選單不會出現
+            var FirstLevel = $("select[name='Country.CountryID']").val();//第一層選擇的值
             ShowSecondDropDownList(FirstLevel);
-        });
-    }
-    function ShowSecondDropDownList(FirstLevel) {
-        $.ajax({
-            url: "@Url.Action("ShowSecondDropDownList","Home")",
-            type: "get",
-            data: { FirstLevel: FirstLevel },
-            async: false,
-            success: function (data) {
-                $("span").empty().html(data);
-            }
-        });
-    }
+
+            //為第一層下拉選單註冊onchange事件
+            $("select[name='Country.CountryID']").change(function () {
+                var FirstLevel = $(this).val();//選擇的值
+                ShowSecondDropDownList(FirstLevel);
+            });
+        }
+
+        function ShowSecondDropDownList(FirstLevel) {
+
+            $.ajax({
+                url: "@Url.Action("ShowSecondDropDownList","Members")",
+                type: "get",
+                contentType: "application/json;charset=utf-8",
+                data: { FirstLevel: FirstLevel },
+                async: false,
+                success: function (data) {
+                    $("select[name='City.CityID']").html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
+        }
     </script>
+
 </head>
 <body>
     <div>
-        @*@Html.DropDownListFor(model => model.Country.CountryID, (IEnumerable<SelectListItem>)ViewBag.CountryItems)*@
-        @Html.DropDownListFor(model => model.Country.CountryID)
-        @*<ul>
-
-                @foreach (var country in Model)
-                {
-                    <li>
-                        @Html.ActionLink(country.CountryName, "Create", "Members")
-                    </li>
-                }
-            </ul>*@
+        <span class="country">
+            @Html.DropDownListFor(model => model.Country.CountryID, (IEnumerable<SelectListItem>)ViewBag.CountryItems)
+        </span>
+        <span class="city">
+            @Html.DropDownListFor(model => model.City.CityID, (IEnumerable<SelectListItem>)ViewBag.CityItems)
+            
+        </span>
     </div>
 </body>
+
+
 
 </html>
