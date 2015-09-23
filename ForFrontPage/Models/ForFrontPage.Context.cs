@@ -18,7 +18,6 @@ namespace ForFrontPage.Models
         public ForFrontPageEntities()
             : base("name=ForFrontPageEntities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

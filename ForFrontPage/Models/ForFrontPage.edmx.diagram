@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6e05351eac974c88b821d516830355da" Name="Diagram1">
-        <EntityTypeShape EntityType="GoModel.Category" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GoModel.City" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GoModel.Country" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="GoModel.Member" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="GoModel.Product" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GoModel.SystemRoles" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <AssociationConnector Association="GoModel.FK__Product__Categor__34C8D9D1" ManuallyRouted="false" />
-        <AssociationConnector Association="GoModel.FK__City__CountryID__6EF57B66" ManuallyRouted="false" />
-        <AssociationConnector Association="GoModel.FK__Member__roleID__49C3F6B7" ManuallyRouted="false" />
+      <Diagram DiagramId="e15df893166e41a5b35eae8127a9cef8" Name="Diagram1">
+        <EntityTypeShape EntityType="ForFrontPageModel.Category" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ForFrontPageModel.City" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ForFrontPageModel.Country" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ForFrontPageModel.Member" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ForFrontPageModel.Product" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ForFrontPageModel.SystemRoles" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="ForFrontPageModel.FK__Product__Categor__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="ForFrontPageModel.FK__City__CountryID__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="ForFrontPageModel.FK__Member__roleID__49C3F6B7" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

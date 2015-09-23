@@ -55,3 +55,4 @@ D:\GitHub\GoBuy\GoBuy\bin\zh-Hant\System.Web.WebPages.Razor.resources.dll
 D:\GitHub\GoBuy\GoBuy\bin\System.Web.Razor.dll
 D:\GitHub\GoBuy\GoBuy\bin\System.Web.Razor.xml
 D:\GitHub\GoBuy\GoBuy\bin\zh-Hant\System.Web.Razor.resources.dll
+D:\GitHub\GoBuy\GoBuy\obj\Debug\GoBuy.csprojResolveAssemblyReference.cache

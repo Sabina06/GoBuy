@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "DataUsage";
 }
 
@@ -7,40 +6,73 @@
 @Scripts.Render("~/bundles/jquery")
 <script>
     var mproduct = null;
-    this._context.ContextOptions.LazyLoadingEnabled = false;
-    $.getJSON("/Home/getProduct",null)
-        .done(function (data) {
-           
-            console.log("data: " + data);
-            mproduct = data;
-            //for (var i = 0; i < data.length; i++) {
-            //    $("#stateList").append("<li>" + data[i].Title + " " + data[i].Genre + " " + data[i].Year + "</li>")
-            //}
-            $.each(data, function (index, optionData) {
-               
-                $("#stateList").append("<li>" + optionData.EnName + " " + optionData.EnName + " " + optionData.EnName + "</li>")
-            })
-        })
-        .fail(function(jqxhr,textStatus,error){ console.log("fail"+error);});
-    
+    //this._context.ContextOptions.LazyLoadingEnabled = false;
+
+
     var demo = new Vue({
         el: '#demo',
         data: {
-            n: mproduct
+            product: null,
+            sortField: "roleID",
+            isRevers: true
+        },
+        created: function () {
+            this.fetchData();
         },
         methods: {
-            onClick: function (e) {
+            onClick:
+            function (e) {
                 // e是原生的DOM事件对象
                 // this 指向该ViewModel实例
                 this.n++;
-            }
+            },
+            fetchData:
+                function () {
+                    $.getJSON("/Home/getProduct", null)
+                   .done(function (data) {
+
+                       console.log("data: " + data);
+                       var self = this;
+                       self.product = data;
+                       //for (var i = 0; i < data.length; i++) {
+                       //    $("#stateList").append("<li>" + data[i].Title + " " + data[i].Genre + " " + data[i].Year + "</li>")
+                       //}
+                       $.each(data, function (index, optionData) {
+
+                           $("#stateList").append("<li>" + optionData.EnName + " " + optionData.EnName + " " + optionData.EnName + "</li>")
+                       })
+                   })
+                   .fail(function (jqxhr, textStatus, error) { console.log("fail" + error); });
+
+                }
         }
     });
 
 </script>
 <div id="stateList"></div>
 <table>
-    <tr v-repeat="n">
-       
-    </tr>
+    <tbody>
+
+        <tr v-repeat="a : product | orderBy sortField isRevers">
+            <td>{{a.roleID}}</td>
+            <td>{{a.EnName}}</td>
+            <td>{{a.Account}}</td>
+            <td>{{a.Email}}</td>
+            <td>{{a.regDate}}</td>
+            @*<td><span v-class="glyphicon:1==1, glyphicon-ok:(a.IsChecked=='Y')">{{a.IsChecked}}</span></td>
+                        <td class="edit-td">
+                    <button type="button" class="btn btn-info btnNote btn-sm"
+                            v-if="!(a.AssetID===CurrAssetID)"
+                            v-on="click: ShowEditPanel(a.AssetID)">
+                        Edit
+                    </button>
+                    <div class="note-dscr">{{a.Note}}</div>
+                    <div class="edit-note-panel" v-if="(a.AssetID===CurrAssetID)">
+                        <input v-model="a.Note" />
+                        <button type="button" class="btn btn-primary" v-on="click: SaveAssetNote(a)">Save</button>
+                        <button type="button" class="btn btn-default" v-on="click: HideEditPanel('')">Clear</button>
+                    </div>
+                </td>*@
+        </tr>
+    </tbody>
 </table>
