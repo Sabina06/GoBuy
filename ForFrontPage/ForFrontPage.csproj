@@ -176,6 +176,9 @@
     <Compile Include="Models\City.cs">
       <DependentUpon>ForFrontPage.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>Supermarket.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Country.cs">
       <DependentUpon>ForFrontPage.tt</DependentUpon>
     </Compile>
@@ -199,8 +202,32 @@
     <Compile Include="Models\Member.cs">
       <DependentUpon>ForFrontPage.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Occupation.cs">
+      <DependentUpon>Supermarket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Supermarket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderLine.cs">
+      <DependentUpon>Supermarket.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>ForFrontPage.tt</DependentUpon>
+      <DependentUpon>Supermarket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supermarket.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Supermarket.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supermarket.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Supermarket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supermarket.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Supermarket.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SystemRoles.cs">
       <DependentUpon>ForFrontPage.tt</DependentUpon>
@@ -210,6 +237,10 @@
     <Compile Include="ViewModel\vm-Home.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Supermarket.mdf" />
+    <Content Include="App_Data\Supermarket_log.ldf">
+      <DependentUpon>Supermarket.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\GoBuy.mdf" />
     <Content Include="App_Data\GoBuy_log.ldf">
       <DependentUpon>GoBuy.mdf</DependentUpon>
@@ -239,6 +270,23 @@
       <DependentUpon>ForFrontPage.edmx</DependentUpon>
       <LastGenOutput>ForFrontPage.cs</LastGenOutput>
     </Content>
+    <EntityDeploy Include="Models\Supermarket.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Supermarket.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Supermarket.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Supermarket.edmx</DependentUpon>
+      <LastGenOutput>Supermarket.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Supermarket.edmx.diagram">
+      <DependentUpon>Supermarket.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Supermarket.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Supermarket.edmx</DependentUpon>
+      <LastGenOutput>Supermarket.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\pp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -254,6 +302,7 @@
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Home\HtmlPage1.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

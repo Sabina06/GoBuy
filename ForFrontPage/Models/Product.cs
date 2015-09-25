@@ -14,12 +14,19 @@ namespace ForFrontPage.Models
     
     public partial class Product
     {
-        public int ProductId { get; set; }
-        public string Name { get; set; }
-        public string Price { get; set; }
-        public Nullable<int> CategoryId { get; set; }
-        public string ProductUrl { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.OrderLine = new HashSet<OrderLine>();
+        }
     
-        public virtual Category Category { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<bool> Active { get; set; }
+        public Nullable<decimal> Stock { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderLine> OrderLine { get; set; }
     }
 }
