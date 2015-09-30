@@ -1,18 +1,20 @@
 {
-  "name": "ForFrontPage",
-  "version": "0.0.0",
-  "authors": [
-    "Sabina06 <prankitty@yahoo.com.tw>"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
+    "name": "ForFrontPage",
+    "version": "0.0.0",
+    "authors": [
+        "Sabina Hu <Sabina.hu@onelab.tw>"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
         "test",
-    "tests"
-  ],
-  "dependencies": {
-    "bootstrap": "~3.3.5",
-    "jquery": "~2.1.4"
-  }
+        "tests"
+    ],
+    "dependencies": {
+         "jquery": "~2.1.4",
+        "bootstrap": "~3.3.5"
+
+    }
 }
